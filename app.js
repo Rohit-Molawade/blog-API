@@ -5,6 +5,8 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts.js');
+const adminRouter = require('./routes/admin.js');
 
 //Mongoose Connection
 mongoose.set('strictQuery', false); // Prepare for Mongoose 7
@@ -23,6 +25,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/admin', adminRouter);
 
 module.exports = app;
