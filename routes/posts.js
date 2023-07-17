@@ -1,10 +1,9 @@
 var express = require('express');
+const PostController = require('../controllers/posts.js')
 var router = express.Router();
 
 /* GET posts. */
-router.get('/', function (req, res) {
-	//get all posts
-});
+router.get('/', PostController.post_get);
 
 /* POST posts. */
 router.post('/', function (req, res) {
@@ -13,9 +12,7 @@ router.post('/', function (req, res) {
 });
 
 /* GET specific post. */
-router.get('/:post_id', function (req, res) {
-	//get post with id
-});
+router.get('/:post_id', PostController.post_get_id);
 
 /* PUT posts. */
 router.put('/:post_id', function (req, res) {

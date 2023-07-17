@@ -2,20 +2,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
+const mongoose = require('./services/dbconnect.js')
+
+var indexRouter = require('./routes/index.js');
 const postsRouter = require('./routes/posts.js');
 const adminRouter = require('./routes/admin.js');
 
-//Mongoose Connection
-mongoose.set('strictQuery', false); // Prepare for Mongoose 7
-
-main().catch((err) => console.log(err));
-
-async function main() {
-	await mongoose.connect(process.env.Mongo_URL);
-}
+//Connect to mongo
+mongoose.main();
 
 var app = express();
 
