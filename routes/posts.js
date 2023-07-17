@@ -1,5 +1,6 @@
 var express = require('express');
 const PostController = require('../controllers/posts.js')
+const CommentController = require('../controllers/comments.js')
 var router = express.Router();
 
 /* GET posts. */
@@ -21,9 +22,7 @@ router.put('/:post_id', function (req, res) {
 });
 
 /* GET comments. */
-router.get('/:post_id/comments', function (req, res) {
-	//get all comments of post
-});
+router.get('/:post_id/comments', CommentController.comment_get);
 
 /* POST comments. */
 router.post('/:post_id/comments', function (req, res) {
