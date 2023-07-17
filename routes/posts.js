@@ -1,6 +1,7 @@
+const PostController = require('../controllers/posts.js');
+const CommentController = require('../controllers/comments.js');
+
 var express = require('express');
-const PostController = require('../controllers/posts.js')
-const CommentController = require('../controllers/comments.js')
 var router = express.Router();
 
 /* GET posts. */

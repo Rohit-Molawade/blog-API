@@ -3,11 +3,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const mongoose = require('./services/dbconnect.js')
+const mongoose = require('./services/dbconnect.js');
 
 var indexRouter = require('./routes/index.js');
 const postsRouter = require('./routes/posts.js');
 const adminRouter = require('./routes/admin.js');
+
+//AUTHENTICATON MIDDLEWARE
+require('./services/passport.js');
 
 //Connect to mongo
 mongoose.main();
@@ -20,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//API ROUTES
 app.use('/api', indexRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/admin', adminRouter);
