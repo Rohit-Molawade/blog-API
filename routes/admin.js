@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET Admin. */
-router.get('/profile', authentication_middleware.authenticate_jwt, adminController.get_profile);
+router.get('/profile', authentication_middleware.authenticate_jwt, adminController.profile_get);
 
 /* POST login. */
 router.post('/login', validator_middleware.admin_login, authentication_middleware.authenticate_local);

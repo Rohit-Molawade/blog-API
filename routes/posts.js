@@ -1,5 +1,7 @@
 const PostController = require('../controllers/posts.js');
 const CommentController = require('../controllers/comments.js');
+const authentication_middleware = require('../middleware/authentication.js');
+const validator_middleware = require('../middleware/validator.js');
 
 var express = require('express');
 var router = express.Router();
@@ -26,14 +28,9 @@ router.put('/:post_id', function (req, res) {
 router.get('/:post_id/comments', CommentController.comment_get);
 
 /* POST comments. */
-router.post('/:post_id/comments', function (req, res) {
-	//create new comments
-});
+router.post('/:post_id/comments', validator_middleware.comment_post, CommentController.comment_post);
 
-/* GET specific comment. */
-router.delete('/:post_id/comments/:comment_id', function (req, res) {
-	//Authorized only
-	//delete comment with id
-});
+/* DELETE specific comment. */
+router.delete('/:post_id/comments/:comment_id', authentication_middleware.authenticate_jwt, CommentController.comment_delete);
 
 module.exports = router;
