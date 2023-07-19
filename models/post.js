@@ -9,6 +9,7 @@ const postschema = new Schema({
 	content: { type: String, required: true },
 	banner_image_url: { type: String, required: true },
 	published: { type: Boolean, required: true },
+	published_time: { type: Date, required: true },
 });
 
 module.exports = mongoose.model('Post', postschema);

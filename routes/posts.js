@@ -15,8 +15,8 @@ router.get('/', PostController.post_get);
 router.post(
 	'/',
 	authentication_middleware.authenticate_jwt,
-	validator_middleware.create_post,
 	upload.single('banner_image'),
+	validator_middleware.create_post,
 	PostController.post_create
 );
 
@@ -24,7 +24,17 @@ router.post(
 router.get('/:post_id', PostController.post_get_id);
 
 /* PUT posts. */
-router.put('/:post_id');
+router.put(
+	'/:post_id',
+	authentication_middleware.authenticate_jwt,
+	upload.single('banner_image'),
+	validator_middleware.create_post,
+	PostController.post_update
+);
+
+router.put('/:post_id/publish', authentication_middleware.authenticate_jwt, PostController.post_update_publish);
+
+router.put('/:post_id/unpublish', authentication_middleware.authenticate_jwt, PostController.post_update_unpublish);
 
 /* GET comments. */
 router.get('/:post_id/comments', CommentController.comment_get);

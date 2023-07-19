@@ -6,7 +6,7 @@ exports.admin_login = [
 	(req, res, next) => {
 		const error_list = validationResult(req);
 		if (!error_list.isEmpty()) {
-			res.status(500).json({
+			res.status(400).json({
 				message: error_list,
 			});
 			return;
@@ -30,7 +30,7 @@ exports.comment_post = [
 	(req, res, next) => {
 		const error_list = validationResult(req);
 		if (!error_list.isEmpty()) {
-			res.status(500).json({
+			res.status(400).json({
 				message: error_list,
 			});
 			return;
@@ -40,12 +40,13 @@ exports.comment_post = [
 ];
 
 exports.create_post = [
-	body('title').trim().notEmpty().withMessage('Title not provided').isAlphanumeric().isLength({ max: 48 }).withMessage('Max length 48').escape(),
-	body('content').trim().notEmpty().withMessage('Content not provided').isAlphanumeric().escape(),
+	body('title').trim().notEmpty().withMessage('Title not provided').isString().isLength({ max: 48 }).withMessage('Max length 48').escape(),
+	body('content').trim().notEmpty().withMessage('Content not provided').isString().escape(),
 	(req, res, next) => {
 		const error_list = validationResult(req);
 		if (!error_list.isEmpty()) {
-			res.status(500).json({
+			console.log('err');
+			res.status(400).json({
 				message: error_list,
 			});
 			return;
