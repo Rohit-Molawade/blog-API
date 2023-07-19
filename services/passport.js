@@ -38,7 +38,7 @@ passport.use(
 		},
 		async (payload, done) => {
 			try {
-				const user = await User.findOne({ email: payload.email }, 'username email, profile_picture_url');
+				const user = await User.findOne({ email: payload.email }, 'username email profile_picture_url');
 				if (user) {
 					return done(null, user);
 				}

@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const cors = require('cors');
 const mongoose = require('./services/dbconnect.js');
 
 var indexRouter = require('./routes/index.js');
@@ -16,6 +16,14 @@ require('./services/passport.js');
 mongoose.main();
 
 var app = express();
+
+//CORS support to allow frontend.
+app.use(
+	cors({
+		origin: 'http://localhost:3001',
+		methods: ['POST', 'GET', 'PUT', 'DELETE'],
+	})
+);
 
 app.use(logger('dev'));
 app.use(express.json());

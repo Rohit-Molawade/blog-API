@@ -39,7 +39,7 @@ exports.comment_delete = async function (req, res, next) {
 		await commentService.delete_comment(comment_id);
 
 		res.status(200).json({
-			message: 'Comment succesfully deleted',
+			message: 'Comment deleted',
 		});
 	} catch (error) {
 		res.status(500);

@@ -27,7 +27,9 @@ exports.create_post = async function (post_info) {
 
 exports.update_post = async function (post_info) {
 	try {
+		//Save old link for deletion.
 		const old_banner_link = await Post.findById(post_info._id, 'banner_image_url');
+
 		const result = await Post.findByIdAndUpdate(post_info._id, post_info, { new: true });
 
 		//Check if update is successful

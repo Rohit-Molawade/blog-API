@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.authenticate_local = function (req, res, next) {
-	passport.authenticate('local', { session: false }, (error, user) => {
+	passport.authenticate('local', { session: false }, (error, user, info) => {
 		if (error || !user) {
 			res.status(400).json({
-				message: 'Something went wrong',
+				message: info.message,
 			});
 			return;
 		}
@@ -20,7 +20,7 @@ exports.authenticate_local = function (req, res, next) {
 			}
 
 			const token = jwt.sign({ _id: user._id, email: user.email }, process.env.jwt_secret, { expiresIn: 3600 });
-			res.status(200).json(token);
+			res.status(200).json({ token, message: 'Login Successful' });
 		});
 	})(req, res, next);
 };
