@@ -38,3 +38,18 @@ exports.comment_post = [
 		next();
 	},
 ];
+
+exports.create_post = [
+	body('title').trim().notEmpty().withMessage('Title not provided').isAlphanumeric().isLength({ max: 48 }).withMessage('Max length 48').escape(),
+	body('content').trim().notEmpty().withMessage('Content not provided').isAlphanumeric().escape(),
+	(req, res, next) => {
+		const error_list = validationResult(req);
+		if (!error_list.isEmpty()) {
+			res.status(500).json({
+				message: error_list,
+			});
+			return;
+		}
+		next();
+	},
+];

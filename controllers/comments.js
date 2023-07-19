@@ -4,7 +4,7 @@ const commentService = require('../services/comments.js');
 exports.comment_get = async function (req, res) {
 	try {
 		const comments = await commentService.get_comments();
-		res.json({
+		res.status(200).json({
 			comments,
 		});
 	} catch (error) {

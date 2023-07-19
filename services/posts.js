@@ -13,3 +13,13 @@ exports.get_posts = async function (post_id) {
 		return error;
 	}
 };
+
+exports.post_create = async function (post_info) {
+	try {
+		const post = new Post(post_info);
+		await post.save();
+		return;
+	} catch (error) {
+		return error;
+	}
+};
