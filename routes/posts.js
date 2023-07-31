@@ -11,6 +11,8 @@ var router = express.Router();
 /* GET posts. */
 router.get('/', PostController.post_get);
 
+router.get('/latest', PostController.post_get_latest)
+
 /* POST posts. */
 router.post(
 	'/',

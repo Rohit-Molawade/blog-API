@@ -60,3 +60,11 @@ exports.unpublish_post = async function (post_id) {
 		return error;
 	}
 };
+
+exports.get_latest = async function () {
+	try {
+		return await Post.find({'published' : true}).sort({published_time : -1}).limit(1).populate('author');
+	} catch (error) {
+		return error;
+	}
+}

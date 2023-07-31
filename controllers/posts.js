@@ -4,7 +4,7 @@ const postService = require('../services/posts.js');
 exports.post_get = async function (req, res) {
 	try {
 		const posts = await postService.get_posts();
-		res.json({
+		res.status(200).json({
 			posts,
 		});
 	} catch (error) {
@@ -106,3 +106,16 @@ exports.post_update_unpublish = async (req, res, next) => {
 		res.send('Some Unknown error occured');
 	}
 };
+
+exports.post_get_latest = async (req, res, next) => {
+	try {
+		const post = await postService.get_latest();
+		console.log(post[0].author.username)
+		res.status(200).send({
+			post,
+		});
+	} catch (error) {
+		res.status(500);
+		res.send('Some Unknown error occured');
+	}
+}
