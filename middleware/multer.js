@@ -3,7 +3,7 @@ const maxsize = 1 * 1000 * 1000;
 
 const multerStorage = multer.diskStorage({
 	destination: function (req, file, done) {
-		done(null, 'public/images/banner');
+		done(null, 'public/images/banners');
 	},
 	filename: function (req, file, done) {
 		const ext = file.mimetype.split('/')[1];
