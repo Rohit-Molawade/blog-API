@@ -1,9 +1,9 @@
 const Comment = require('../models/comment.js');
 
-exports.get_comments = async function () {
+exports.get_comments = async function (postId) {
 	try {
-		//Return all posts
-		return await Comment.find({}).sort({ timestamp: -1 }).populate('post');
+		//Return all comments
+		return await Comment.find({post: postId}).sort({ timestamp: -1 }).populate('post');
 	} catch (error) {
 		return error;
 	}

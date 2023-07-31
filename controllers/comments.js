@@ -3,7 +3,7 @@ const commentService = require('../services/comments.js');
 //GET Comments controller
 exports.comment_get = async function (req, res) {
 	try {
-		const comments = await commentService.get_comments();
+		const comments = await commentService.get_comments(req.params.post_id);
 		res.status(200).json({
 			comments,
 		});
