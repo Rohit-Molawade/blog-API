@@ -11,6 +11,9 @@ router.get('/profile', authentication_middleware.authenticate_jwt, adminControll
 /* POST login. */
 router.post('/login', validator_middleware.admin_login, authentication_middleware.authenticate_local);
 
+/* GET Admin public info. */
+router.get('/public', adminController.profile_public_get);
+
 /* POST logout. */
 router.post('/logout', function (req, res) {
 	// logout admin

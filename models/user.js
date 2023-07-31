@@ -7,6 +7,7 @@ const userschema = new Schema({
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	profile_picture_url: { type: String, required: true },
+	about: {type: String, required: true, maxLength: 48},
 });
 
 module.exports = mongoose.model('User', userschema);
