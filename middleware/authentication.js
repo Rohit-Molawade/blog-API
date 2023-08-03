@@ -6,7 +6,7 @@ exports.authenticate_local = function (req, res, next) {
 	passport.authenticate('local', { session: false }, (error, user, info) => {
 		if (error || !user) {
 			res.status(400).json({
-				message: info.message,
+				error: info.message,
 			});
 			return;
 		}
@@ -15,12 +15,13 @@ exports.authenticate_local = function (req, res, next) {
 		req.login(user, { session: false }, (err) => {
 			if (err) {
 				res.status(400).json({
-					message: 'Some error Occured',
+					error: 'Some error Occured',
 				});
 			}
 
 			const token = jwt.sign({ _id: user._id, email: user.email }, process.env.jwt_secret, { expiresIn: 3600 });
-			res.status(200).json({ token, message: 'Login Successful' });
+			res.status(200)
+			.json({ token, user : {name: user.username, profile_picture_url : user.profile_picture_url, v_profile_picture_url : user.v_profile_picture_url} ,message: 'Login Successful' });
 		});
 	})(req, res, next);
 };

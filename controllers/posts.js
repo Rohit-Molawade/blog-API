@@ -110,7 +110,6 @@ exports.post_update_unpublish = async (req, res, next) => {
 exports.post_get_latest = async (req, res, next) => {
 	try {
 		const post = await postService.get_latest();
-		console.log(post[0].author.username)
 		res.status(200).send({
 			post,
 		});
