@@ -1,13 +1,18 @@
 const Post = require('../models/post.js');
 const fs = require('fs/promises');
 
-exports.get_posts = async function (post_id) {
+exports.get_posts = async function (post_id, params) {
 	try {
 		//Get a specific post with its ID
 		if (post_id) {
 			return await Post.findById(post_id).populate('author');
 		} else {
 			//Return all posts
+            if(typeof params !== 'undefined') {
+                //Return posts depending on the params query parameter
+                //Published may be true OR false
+                return await Post.find({}).where('published').equals(params).sort({ timestamp: -1 }).populate('author');
+            }
 			return await Post.find({}).sort({ timestamp: -1 }).populate('author');
 		}
 	} catch (error) {

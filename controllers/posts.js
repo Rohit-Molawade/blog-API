@@ -3,7 +3,8 @@ const postService = require('../services/posts.js');
 //GET posts controller
 exports.post_get = async function (req, res) {
 	try {
-		const posts = await postService.get_posts();
+        const params = req.query.publish;
+		const posts = await postService.get_posts(undefined, params);
 		res.status(200).json({
 			posts,
 		});
