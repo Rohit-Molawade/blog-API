@@ -5,5 +5,5 @@ require('dotenv').config();
 mongoose.set('strictQuery', false); // Prepare for Mongoose 7
 
 exports.main = async function () {
-	await mongoose.connect(process.env.Mongo_URL);
+    await mongoose.connect(process.env.Mongo_URL);
 };

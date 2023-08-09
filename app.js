@@ -19,10 +19,10 @@ var app = express();
 
 //CORS support to allow frontend.
 app.use(
-	cors({
-		origin: 'http://localhost:3000',
-		methods: ['POST', 'GET', 'PUT', 'DELETE'],
-	})
+    cors({
+        origin: 'http://localhost:3000',
+        methods: ['POST', 'GET', 'PUT', 'DELETE'],
+    })
 );
 
 app.use(logger('dev'));

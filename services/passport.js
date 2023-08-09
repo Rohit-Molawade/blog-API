@@ -8,44 +8,50 @@ const User = require('../models/user.js');
 
 //Implement Local strategy for authentication
 passport.use(
-	new localstrategy({ usernameField: 'email', passwordField: 'password' }, async (email, password, done) => {
-		try {
-			const user = await User.findOne({ email: email });
-			if (!user) {
-				return done(null, false, { message: 'Email not found' });
-			}
+    new localstrategy(
+        { usernameField: 'email', passwordField: 'password' },
+        async (email, password, done) => {
+            try {
+                const user = await User.findOne({ email: email });
+                if (!user) {
+                    return done(null, false, { message: 'Email not found' });
+                }
 
-			//Compare user's hashed password and entered password
-			const valid = await bcrypt.compare(password, user.password);
+                //Compare user's hashed password and entered password
+                const valid = await bcrypt.compare(password, user.password);
 
-			if (valid) {
-				return done(null, user, { message: 'Login Successful' });
-			}
+                if (valid) {
+                    return done(null, user, { message: 'Login Successful' });
+                }
 
-			return done(null, false, { message: 'Password wrong' });
-		} catch (error) {
-			return done(error);
-		}
-	})
+                return done(null, false, { message: 'Password wrong' });
+            } catch (error) {
+                return done(error);
+            }
+        }
+    )
 );
 
 //Implement JWT Strategy for Authorization to API
 passport.use(
-	new jwtstrategy(
-		{
-			secretOrKey: process.env.jwt_secret,
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-		},
-		async (payload, done) => {
-			try {
-				const user = await User.findOne({ email: payload.email }, 'username email profile_picture_url');
-				if (user) {
-					return done(null, user);
-				}
-				return done(null, false);
-			} catch (error) {
-				done(error);
-			}
-		}
-	)
+    new jwtstrategy(
+        {
+            secretOrKey: process.env.jwt_secret,
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        },
+        async (payload, done) => {
+            try {
+                const user = await User.findOne(
+                    { email: payload.email },
+                    'username email profile_picture_url'
+                );
+                if (user) {
+                    return done(null, user);
+                }
+                return done(null, false);
+            } catch (error) {
+                done(error);
+            }
+        }
+    )
 );

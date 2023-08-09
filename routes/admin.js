@@ -6,17 +6,25 @@ var express = require('express');
 var router = express.Router();
 
 /* GET Admin. */
-router.get('/profile', authentication_middleware.authenticate_jwt, adminController.profile_get);
+router.get(
+    '/profile',
+    authentication_middleware.authenticate_jwt,
+    adminController.profile_get
+);
 
 /* POST login. */
-router.post('/login', validator_middleware.admin_login, authentication_middleware.authenticate_local);
+router.post(
+    '/login',
+    validator_middleware.admin_login,
+    authentication_middleware.authenticate_local
+);
 
 /* GET Admin public info. */
 router.get('/public', adminController.profile_public_get);
 
 /* POST logout. */
 router.post('/logout', function (req, res) {
-	// logout admin
+    // logout admin
 });
 
 module.exports = router;
