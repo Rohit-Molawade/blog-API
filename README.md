@@ -15,4 +15,4 @@ Mongooose
 Link to the Repo [https://github.com/Rohit-Molawade/blog-client]
 
 ## Admin Dashboard
-Link to the Repo [https://github.com/Rohit-Molawade/blog-cms]
+Link to the Repo [https://github.com/Rohit-Molawade/blog-admin-dashboard]
